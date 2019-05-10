@@ -1,7 +1,4 @@
 <?php
-	ini_set('display_errors', 1);
-	ini_set('display_startup_errors', 1);
-	error_reporting(E_ALL);
 	
 	class db {
 
@@ -237,110 +234,112 @@
 		}
 
 	}
-  /* Here are few simple examples of using this class (In this example, I have assumed default database "test" */
-$db = new db;
-$db->initiallize("localhost", "username", "password", "test");
-/* Lets create a table first */
-$query = $db->query("CREATE TABLE CUSTOMERS (
-    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    firstname VARCHAR(30) NOT NULL,
-    lastname VARCHAR(30) NOT NULL,
-    email VARCHAR(50),
-    reg_date TIMESTAMP
-    );
-");
-if($query[0] == true) {
-  echo "Table CUSTOMERS has been successfully created<br/>";
-}
-else {
-    die($query[1]);
-}
 
-/* lets insert some data in the table */
-$table = "CUSTOMERS";
-$data = array('firstname'=>'Sachin', 'Lastname'=>'Kekarjawalekar', 'email'=>'email@example.com');
-$format = 'sss';
-$query = $db->insert($table, $data, $format);
-if($query[0] == true) {
-    echo "New customer added successfully<br/>";
-}
-else {
-    die($query[1]);
-}
-$data = array('firstname'=>'Santosh', 'Lastname'=>'Kekarjawalekar', 'email'=>'email1@example.com');
-$query = $db->insert($table, $data, $format);
-if($query[0] == true) {
-    echo "New customer added successfully<br/><hr/>";
-}
-else {
-    die($query[1]);
-}
-/* Lets select the added two customers and display them */
-$query = $db->select($table,"*");
 
-if($query[0] == true) {
-    echo $query[1]->num_rows." customers found<br/><hr/>";
-    echo "<table width='80%' align='center' border='1px'>";
-    $i=0;
-    while($row = $query[1]->fetch_assoc()) {
-        if($i==0) {
-            echo "<tr>";
-            foreach ($row as $key => $value) {
-                echo "<th>".$key."</th>";
-            }
-            echo "</tr>";
-        } 
-        echo "<tr>";
-        foreach ($row as $key => $value) {
-            echo "<td>".$value."</td>";
-        }
-        echo "</tr>";
-        $i++;
-    }
-    echo "</table><hr/>";
-}
-else {
-    die($query[1]);
-}
-/* Let's update the customer with id=1 */
-$data = array('firstname'=>'Anmol', 'lastname'=>'Kekarjawlekar');
-$format = 'ss';
-$whereFormat = 'id=?';
-$whereValues = array('i'=>2);
-$query = $db->update($table, $data, $format, $whereFormat, $whereValues);
-if($query[0] == true) {
-    echo "Custormer with ID 2 has been updated successfully <br/><hr/>";
-}
+	  /* Here are few simple examples of using this class (In this example, I have assumed default database "test" */
+	$db = new db;
+	$db->initiallize("localhost", "username", "password", "test");
+	/* Lets create a table first */
+	$query = $db->query("CREATE TABLE CUSTOMERS (
+	    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	    firstname VARCHAR(30) NOT NULL,
+	    lastname VARCHAR(30) NOT NULL,
+	    email VARCHAR(50),
+	    reg_date TIMESTAMP
+	    );
+	");
+	if($query[0] == true) {
+	  echo "Table CUSTOMERS has been successfully created<br/>";
+	}
+	else {
+	    die($query[1]);
+	}
 
-/* Now lets show up the updated customer */
+	/* lets insert some data in the table */
+	$table = "CUSTOMERS";
+	$data = array('firstname'=>'Sachin', 'Lastname'=>'Kekarjawalekar', 'email'=>'email@example.com');
+	$format = 'sss';
+	$query = $db->insert($table, $data, $format);
+	if($query[0] == true) {
+	    echo "New customer added successfully<br/>";
+	}
+	else {
+	    die($query[1]);
+	}
+	$data = array('firstname'=>'Santosh', 'Lastname'=>'Kekarjawalekar', 'email'=>'email1@example.com');
+	$query = $db->insert($table, $data, $format);
+	if($query[0] == true) {
+	    echo "New customer added successfully<br/><hr/>";
+	}
+	else {
+	    die($query[1]);
+	}
+	/* Lets select the added two customers and display them */
+	$query = $db->select($table,"*");
 
-$query = $db->select($table,"*", $whereFormat, $whereValues);
-if($query[0] == true) {
-    echo $query[1]->num_rows." customers found<br/><hr/>";
-    echo "<table width='80%' align='center' border='1px'>";
-    $i=0;
-    while($row = $query[1]->fetch_assoc()) {
-        if($i==0) {
-            echo "<tr>";
-            foreach ($row as $key => $value) {
-                echo "<th>".$key."</th>";
-            }
-            echo "</tr>";
-        } 
-        echo "<tr>";
-        foreach ($row as $key => $value) {
-            echo "<td>".$value."</td>";
-        }
-        echo "</tr>";
-        $i++;
-    }
-    echo "</table><hr/>";
-}
-else {
-    die($query[1]);
-}
+	if($query[0] == true) {
+	    echo $query[1]->num_rows." customers found<br/><hr/>";
+	    echo "<table width='80%' align='center' border='1px'>";
+	    $i=0;
+	    while($row = $query[1]->fetch_assoc()) {
+		if($i==0) {
+		    echo "<tr>";
+		    foreach ($row as $key => $value) {
+			echo "<th>".$key."</th>";
+		    }
+		    echo "</tr>";
+		} 
+		echo "<tr>";
+		foreach ($row as $key => $value) {
+		    echo "<td>".$value."</td>";
+		}
+		echo "</tr>";
+		$i++;
+	    }
+	    echo "</table><hr/>";
+	}
+	else {
+	    die($query[1]);
+	}
+	/* Let's update the customer with id=1 */
+	$data = array('firstname'=>'Anmol', 'lastname'=>'Kekarjawlekar');
+	$format = 'ss';
+	$whereFormat = 'id=?';
+	$whereValues = array('i'=>2);
+	$query = $db->update($table, $data, $format, $whereFormat, $whereValues);
+	if($query[0] == true) {
+	    echo "Custormer with ID 2 has been updated successfully <br/><hr/>";
+	}
 
-/* Now let's turncat the table */
-$query = $db->query("TRUNCATE TABLE ".$table.";");
+	/* Now lets show up the updated customer */
+
+	$query = $db->select($table,"*", $whereFormat, $whereValues);
+	if($query[0] == true) {
+	    echo $query[1]->num_rows." customers found<br/><hr/>";
+	    echo "<table width='80%' align='center' border='1px'>";
+	    $i=0;
+	    while($row = $query[1]->fetch_assoc()) {
+		if($i==0) {
+		    echo "<tr>";
+		    foreach ($row as $key => $value) {
+			echo "<th>".$key."</th>";
+		    }
+		    echo "</tr>";
+		} 
+		echo "<tr>";
+		foreach ($row as $key => $value) {
+		    echo "<td>".$value."</td>";
+		}
+		echo "</tr>";
+		$i++;
+	    }
+	    echo "</table><hr/>";
+	}
+	else {
+	    die($query[1]);
+	}
+
+	/* Now let's turncat the table */
+	$query = $db->query("TRUNCATE TABLE ".$table.";");
 
 ?>
