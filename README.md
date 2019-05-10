@@ -1,0 +1,6 @@
+# php-mysql-prepared-statements-class
+This is a php class which can be used for simple database queries using prepared statements, Its under development yet and not a final version
+
+I have also included an example at the end of the class to show you how it works...
+
+Suggest what more I can do for more and how can I make it more proper...
