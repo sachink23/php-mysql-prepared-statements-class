@@ -100,7 +100,7 @@
 				if($whereValues != NULL) {
 					$whFormat = NULL;
 					foreach ($whereValues as $key => $value) {
-						$whFormat.=$key;
+						$whFormat.=$value;
 					}
 					// append whereFormat
 					$format.=$whFormat;
@@ -149,7 +149,7 @@
 				if($whereValues!=NULL) {
 					$whFormat = NULL;
 					foreach ($whereValues as $key => $value) {
-						$whFormat.=$key;
+						$whFormat.=$value;
 					}
 					// append whereFormat
 					$format=$whFormat;
@@ -305,7 +305,7 @@
 	$data = array('firstname'=>'Anmol', 'lastname'=>'Kekarjawlekar');
 	$format = 'ss';
 	$whereFormat = 'id=?';
-	$whereValues = array('i'=>2);
+	$whereValues = array(2=>'i');
 	$query = $db->update($table, $data, $format, $whereFormat, $whereValues);
 	if($query[0] == true) {
 	    echo "Custormer with ID 2 has been updated successfully <br/><hr/>";
