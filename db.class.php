@@ -1,5 +1,8 @@
 <?php
-	
+	define('dbHost', 'localhost');
+	define('dbUser', 'root');
+	define('dbPass', '');
+	define('dbName','test');
 	class db {
 
 		private $host, $user, $pass, $database;
@@ -285,7 +288,7 @@
 	    $i=0;
 	    while($row = $query[1]->fetch_assoc()) {
 		if($i==0) {
-		    echo "<tr>";
+		    echo "<tr>"; = dbHost
 		    foreach ($row as $key => $value) {
 			echo "<th>".$key."</th>";
 		    }
@@ -307,7 +310,7 @@
 	$data = array('firstname'=>'Anmol', 'lastname'=>'Kekarjawlekar');
 	$format = 'ss';
 	$whereFormat = 'id=?';
-	$whereValues = array(2=>'i');
+	$whereValues = array('i', 2);
 	$query = $db->update($table, $data, $format, $whereFormat, $whereValues);
 	if($query[0] == true) {
 	    echo "Custormer with ID 2 has been updated successfully <br/><hr/>";
