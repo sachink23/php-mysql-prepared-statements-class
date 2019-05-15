@@ -3,6 +3,7 @@
 	define('dbUser', 'root');
 	define('dbPass', '');
 	define('dbName','test');
+
 	class db {
 
 		private $host, $user, $pass, $database;
@@ -101,10 +102,10 @@
 			else {
 				$query = "UPDATE ".$table." SET " .$colPlaceholder ." WHERE ".$whereFormat.";";	
 				if($whereValues != NULL) {
-					$whFormat = $wherevalues[0];
+					$whFormat = $whereValues[0];
 					$valuesToAppend = array();
-					for ($i=1; $i < count($wherevalues); $i++) { 
-						$valuesToAppend[] = $wherevalues[$i];
+					for ($i=1; $i < count($whereValues); $i++) { 
+						$valuesToAppend[] = $whereValues[$i];
 					}
 
 					// append whereFormat
@@ -157,8 +158,6 @@
 					for ($i=1; $i < count($whereValues); $i++) { 
 						$values[] = $whereValues[$i];
 					}
-					
-					$values = $this->seperateArrays($whereValues)[0];
 					array_unshift($values, $format);
 					$stmt=$con->prepare($query);
 					call_user_func_array(array($stmt, 'bind_param'), $this->refValues($values));
@@ -239,6 +238,8 @@
 		}
 
 	}
+
+
 
 
 	  /* Here are few simple examples of using this class (In this example, I have assumed default database "test" */
