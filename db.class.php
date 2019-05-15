@@ -4,7 +4,7 @@
 
 		private $host, $user, $pass, $database;
 
-		function initiallize($dbHost, $dbUser, $dbPass, $dbName) {
+		function initialize($dbHost = dbHost, $dbUser = dbUser, $dbPass = dbPass, $dbName = dbName) {
 			$this->host = $dbHost;
 			$this->user = $dbUser;
 			$this->pass = $dbPass;
@@ -98,13 +98,15 @@
 			else {
 				$query = "UPDATE ".$table." SET " .$colPlaceholder ." WHERE ".$whereFormat.";";	
 				if($whereValues != NULL) {
-					$whFormat = NULL;
-					foreach ($whereValues as $key => $value) {
-						$whFormat.=$value;
+					$whFormat = $wherevalues[0];
+					$valuesToAppend = array();
+					for ($i=1; $i < count($wherevalues); $i++) { 
+						$valuesToAppend[] = $wherevalues[$i];
 					}
+
 					// append whereFormat
 					$format.=$whFormat;
-					$values = array_merge($values, $this->seperateArrays($whereValues)[1]);
+					$values = array_merge($values, $valuesToAppend);
 				}
 			}
 			// Prepend the format to $values
@@ -147,13 +149,13 @@
 			if($whereFormat != NULL) {
 				$query = $q_start.$columnsToSelect." FROM ".$table." WHERE ".$whereFormat .";";
 				if($whereValues!=NULL) {
-					$whFormat = NULL;
-					foreach ($whereValues as $key => $value) {
-						$whFormat.=$value;
+					$values = array();
+					$format = $whereValues[0];				
+					for ($i=1; $i < count($whereValues); $i++) { 
+						$values[] = $whereValues[$i];
 					}
-					// append whereFormat
-					$format=$whFormat;
-					$values = $this->seperateArrays($whereValues)[1];
+					
+					$values = $this->seperateArrays($whereValues)[0];
 					array_unshift($values, $format);
 					$stmt=$con->prepare($query);
 					call_user_func_array(array($stmt, 'bind_param'), $this->refValues($values));
