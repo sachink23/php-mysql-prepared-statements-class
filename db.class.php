@@ -173,7 +173,18 @@
 				return array(true, $stmt->get_result());
 			}
 		}
-
+		// can be used to start transaction
+		public function transaction() {
+			return $this->query("START TRANSACTION");
+		}
+		// can be used to commit transaction
+		public function commit() {
+			return $this->query("START TRANSACTION");
+		}
+		// can be used for rollback
+		public function rollback() {
+			return $this->query("ROLLBACK");
+		}
 		/*
 			This function creates a placeholder of ?,? by fetching the array of values or names of columns in insert query	
 		*/
