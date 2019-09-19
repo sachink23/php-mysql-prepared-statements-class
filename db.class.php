@@ -10,7 +10,7 @@
 			$this->user = $dbUser;
 			$this->pass = $dbPass;
 			$this->database = $dbName;
-            $this->con = new mysqli($this->host, $this->user, $this->pass, $this->database);
+            		$this->con = new mysqli($this->host, $this->user, $this->pass, $this->database);
 			if($this->con->connect_error) {
 				$this->con = false;
 			}
