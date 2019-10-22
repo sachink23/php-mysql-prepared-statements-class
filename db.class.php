@@ -184,7 +184,7 @@
 					return $this->query("ROLLBACK");
 					break;
 				default:
-					return Array(false, "Invalid Option")
+					return Array(false, "Invalid Option");
 					break;
 			}
 			
